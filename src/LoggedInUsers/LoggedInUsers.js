@@ -48,21 +48,19 @@ const Dashboard = () => {
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Date of Birth</th>
-                        <th>Login Time</th>
                     </tr>
                     </thead>
                     <tbody>
                     {
                         userData === null || undefined ? 'No data'
                             :
-                            (userData.sort(function(a,b){if(a.name < b.name) {return -1}}).map((val, index) => {
+                            (userData.sort(function(a,b){if(a.name < b.name) {return -1}}).filter(value => value.isLogin === true).map((val, index) => {
                                 return (
                                     <tr key={index}>
                                         <>
                                             <td>{val.name}</td>
                                             <td>{val.email}</td>
                                             <td>{val.date}</td>
-                                            <td>{val.login}</td>
                                         </>
                                     </tr>
                                 )

@@ -5,6 +5,8 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import Registration from "./Registration/Registration";
 import Dashboard from "./Dashboard/Dashboard";
 import {ToastContainer} from "react-toastify";
+import Home from "./Home/Home";
+import LoggedInUsers from "./LoggedInUsers/LoggedInUsers";
 
 const myData = localStorage.getItem('user');
 const user = JSON.parse(myData)
@@ -17,7 +19,8 @@ function App() {
             <BrowserRouter>
                 <ToastContainer/>
                 <Routes>
-                    <Route path="/" element={<Navbarr/>}/>
+                    <Route path="/" element={<Home/>}/>
+                    {/*<Route path="/" element={<Home/>}/>*/}
                     <Route path="/Login" element={<Login/>}/>
                     <Route path="/Registration" element={<Registration/>}/>
 
@@ -30,6 +33,11 @@ function App() {
                             <Dashboard/>
                         </ProtectedRoute>
                     }/>
+                    <Route path="/loggedInUsers" element={
+                        <ProtectedRoute redirectTo="/Login">
+                            <LoggedInUsers/>
+                        </ProtectedRoute>
+                    }/>
                 </Routes>
             </BrowserRouter>
         </div>
@@ -37,8 +45,11 @@ function App() {
 }
 
 const ProtectedRoute = ({children, redirectTo}) => {
-    return (user && user.isAuth ? <Navigate to={redirectTo}/> : children,
-        user && user.isLogin === true ? <Navigate to={redirectTo}/> : children)
+    return user && user.isAuth ? <Navigate to={redirectTo}/> : children;
 }
+
+// const ProtectedRoutes = ({children, redirectTo}) => {
+//     return user && user.isLogin === true ? <Navigate to={redirectTo} /> : children;
+// }
 
 export default App;

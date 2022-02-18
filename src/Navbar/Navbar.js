@@ -1,15 +1,16 @@
-import React from "react";
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Card, Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import {useNavigate} from 'react-router-dom';
 import Login from "../Login/Login";
+import axios from "axios";
 
 const Navbarr = () => {
 
-    const myDataa = localStorage.getItem('user');
-    const user = JSON.parse(myDataa)
-
-    const myDatass = localStorage.getItem('data');
-    const myData = JSON.parse(myDatass)
+    // const myDataa = localStorage.getItem('user');
+    // const user = JSON.parse(myDataa)
+    //
+    // const myDatass = localStorage.getItem('data');
+    // const myData = JSON.parse(myDatass)
 
     let navigate = useNavigate();
 
@@ -29,6 +30,8 @@ const Navbarr = () => {
         navigate(`/`)
     }
 
+
+
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -39,15 +42,17 @@ const Navbarr = () => {
                         <Nav className="me-auto">
                             <Nav.Link onClick={redirectToRegistration}>Registration</Nav.Link>
                             <Nav.Link onClick={redirectToLogin}>Login</Nav.Link>
-                            {
-                                user && user.isAuth &&
-                                <Nav.Link onClick={redirectToDashboard}>Dashboard</Nav.Link>
-                            }
+                            {/*{*/}
+                            {/*    user && user.isAuth &&*/}
+                            {/*    <Nav.Link onClick={redirectToDashboard}>Dashboard</Nav.Link>*/}
+                            {/*}*/}
 
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+
+
         </div>
     );
 };

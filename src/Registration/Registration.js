@@ -15,7 +15,7 @@ const Registration = () => {
         email: "",
         date: "",
         isAuth: false,
-        isLogin: false
+        isLogin: false,
     });
 
     const btnDisabled = user.username === '' || user.password === '' || user.name === '' || user.email === '' || user.date === '';
@@ -32,13 +32,14 @@ const Registration = () => {
     }
 
     const handleClick = (user ) => {
-        debugger
+        // debugger
         console.log(user);
         axios.post("http://localhost:4000/users", user).then(data => {
                 const newArr = [...newArray];
                 newArr.push(data.data);
                 setNewArray(newArr)
                 if (data) {
+                    user.isAuth = true
                     navigate(`/Login`)
                     successNotify('Registration Successful');
                 }
